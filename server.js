@@ -16,7 +16,7 @@ const env = {
 
 const generateOptions = {
   length: env.CODE_SIZE,
-  charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:?#[]@!$&'()*+,;=`."
+  charset: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:?#[]@!$&'()*+,;=."
 };
 function generate() {
   return random.generate(generateOptions);
