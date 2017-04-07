@@ -73,7 +73,7 @@ const handleRedirectRequest = urlsCollection => async ({ originalUrl }, res) => 
   if (shortened) {
     res.redirect(307, shortened.long);
   } else {
-    res.status(404).json({ code: 404, message: 'Not Found' });
+    res.status(404).send('Not Found');
   }
 };
 
@@ -81,7 +81,7 @@ const handleRedirectRequest = urlsCollection => async ({ originalUrl }, res) => 
   const db = await MongoClient.connect(env.MONGODB_URI);
   const urls = await db.collection('urls');
   await urls.createIndex({ updatedAt: 1 }, { expireAfterSeconds: env.EXPIRE_SECONDS });
-  await urls.createIndex({ short: 1 });
+  await urls.createIndex({ longUrl: 1 });
 
   app.get('/generate/*', wrap(handleShortenRequest(urls)));
   app.get('*', wrap(handleRedirectRequest(urls)));
