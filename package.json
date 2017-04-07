@@ -1,0 +1,21 @@
+{
+  "name": "shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-async-wrap": "^1.0.0",
+    "mongo-errors": "^1.0.1",
+    "mongodb": "^2.2.25",
+    "randomstring": "^1.1.5"
+  },
+  "engines": {
+    "node": "7.6"
+  }
+}
