@@ -8,7 +8,7 @@ const app = require('express')();
 const env = {
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost/shorten',
   EXPIRE_SECONDS: Number.parseInt(process.env.EXPIRE_SECONDS || '3600'), // 1 hour by default,
-  PREFIX: process.env.PREFIX || 'localhost:3000',
+  PREFIX: process.env.PREFIX || '',
   PORT: process.env.PORT || '3000',
   CODE_SIZE: Number.parseInt(process.env.CODE_SIZE || '5')
 };
@@ -60,11 +60,11 @@ async function expandUrl(urlsCollection, key) {
   return value ? { short: value._id, long: value.longUrl } : null;
 }
 
-const handleShortenRequest = urlsCollection => async ({ originalUrl }, res) => {
+const handleShortenRequest = urlsCollection => async ({ originalUrl, headers }, res) => {
   const longUrl = originalUrl.replace('/generate/', '');
   const { short } = await shortenUrl(urlsCollection, longUrl);
 
-  res.send(`${env.PREFIX}/${short}`);
+  res.send(`${env.PREFIX}${headers.host}/${short}`);
 };
 
 const handleRedirectRequest = urlsCollection => async ({ originalUrl }, res) => {
