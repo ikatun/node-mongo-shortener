@@ -6,7 +6,7 @@ const url = require('url');
 const app = require('express')();
 
 const env = {
-  DB_URI: process.env.DB_URI || 'mongodb://localhost/shorten',
+  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost/shorten',
   EXPIRE_SECONDS: Number.parseInt(process.env.EXPIRE_SECONDS || '3600'), // 1 hour by default,
   PREFIX: process.env.PREFIX || 'localhost:3000',
   PORT: process.env.PORT || '3000',
@@ -78,7 +78,7 @@ const handleRedirectRequest = urlsCollection => async ({ originalUrl }, res) => 
 };
 
 (async () => {
-  const db = await MongoClient.connect(env.DB_URI);
+  const db = await MongoClient.connect(env.MONGODB_URI);
   const urls = await db.collection('urls');
   await urls.createIndex({ updatedAt: 1 }, { expireAfterSeconds: env.EXPIRE_SECONDS });
   await urls.createIndex({ short: 1 });
