@@ -2,7 +2,7 @@
 URL shortening mongo/node service
 
 A very simple and high performance web service used for link shortening.
-Works out of the box on heroku.com platform, just deploy it as a heroku app with active mongodb addon.
+Works out of the box on heroku.com platform, just deploy it as a heroku app with active mongodb addon using heroku's github integration.
 
 Default behaviour is to delete every link if it's not used for 1 hour or longer.
 Also, protocol prefix (http://) is ommited from the shortened url.
